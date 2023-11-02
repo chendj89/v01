@@ -100,4 +100,4 @@ const scss = () => {
 }
 
 autoInstall(deps)
-scss()
+// scss()
