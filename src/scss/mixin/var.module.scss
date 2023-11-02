@@ -1,0 +1,14 @@
+$theme: seagreen;
+$size: 40;
+$border: 10;
+$gap: 10;
+$radius: 4;
+$zIndexGrid: 99;
+:export {
+  theme: $theme;
+  size: $size;
+  border: $border;
+  gap: $gap;
+  radius: $radius;
+  zIndexGrid: $zIndexGrid;
+}

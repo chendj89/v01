@@ -1,0 +1,25 @@
+@mixin Grid() {
+  position: relative;
+  border: var(--border) solid #fff;
+  border-radius: var(--radius);
+}
+@mixin GridCell() {
+  position: absolute;
+  border-radius: var(--radius);
+  background-color: seagreen;
+}
+.grid {
+  @include Grid();
+  &-cell {
+    @include GridCell();
+  }
+  &-fill {
+    position: absolute;
+    left: 3px;
+    bottom: 3px;
+    width: 8px;
+    height: 8px;
+    background-size: 100% 100%;
+    background-image: url('https://api.iconify.design/bi:circle-fill.svg?color=%23ffffff');
+  }
+}
