@@ -1,0 +1,39 @@
+// 默认已导入 @/scss/mixin/var.module.scss 全局变量
+// 默认已导入 @/scss/mixin/index.scss      全局方法
+:root {
+  --gap: #{$gap}px;
+  --border: #{$border}px;
+  --size: #{$size}px;
+  --radius: #{$radius}px;
+  --zIndexGrid: #{$zIndexGrid};
+  --theme: #{$theme};
+}
+* {
+  &::after,
+  &::before {
+    box-sizing: border-box;
+  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  padding: 50px;
+  background: #f0f2f5;
+}
+::view-transition-old(*) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(*) {
+  mix-blend-mode: normal;
+  animation: clip 0.5s ease-in;
+}
+@keyframes clip {
+  from {
+    clip-path: circle(0% at var(--x) var(--y));
+  }
+  to {
+    clip-path: circle(100% at var(--x) var(--y));
+  }
+}

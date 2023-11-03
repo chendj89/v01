@@ -7,6 +7,10 @@ export default defineComponent({
     isGrid: {
       type: Boolean,
       default: false
+    },
+    noBg: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
@@ -29,7 +33,7 @@ export default defineComponent({
   },
   render() {
     return (
-      <div class="grid-cell" style={this.style}>
+      <div class={['grid-cell', { nobg: this.$props.noBg }]} style={this.style}>
         <div class="grid-fill"></div>
         {this.$slots.default?.()}
       </div>

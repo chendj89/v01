@@ -74,6 +74,7 @@
     "t1": true,
     "GridCell": true,
     "GridContent": true,
-    "GridProps": true
+    "GridProps": true,
+    "Theme": true
   }
 }

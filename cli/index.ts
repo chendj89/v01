@@ -12,6 +12,10 @@ const deps = [
     install: ['vite-plugin-vue-setup-extend']
   },
   {
+    name: '动画工具',
+    install: ['gsap']
+  },
+  {
     name: '辅助工具',
     install: ['gsap', 'dayjs']
   },

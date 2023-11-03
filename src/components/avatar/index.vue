@@ -1,13 +1,17 @@
 <template>
   <div class="avatar">
-    <img
-      class="avatar-img"
-      src="https://avatars.githubusercontent.com/u/105529957"
-    />
+    <img v-if="props.src" class="avatar-img" :src="props.src" />
   </div>
 </template>
 
-<script setup lang="ts" name="Avatar"></script>
+<script setup lang="ts" name="Avatar">
+export interface Props {
+  src?: string
+}
+const props = withDefaults(defineProps<Props>(), {
+  src: '',
+})
+</script>
 
 <style lang="scss" scoped>
 .avatar {
@@ -16,6 +20,7 @@
   height: 100%;
   border-radius: var(--radius);
   overflow: hidden;
+
   &-img {
     display: block;
     width: 100%;

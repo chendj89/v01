@@ -10,6 +10,7 @@ declare global {
   const GridCell: typeof import('./src/hooks/GridCell')['default']
   const GridContent: typeof import('./src/hooks/GridContent')['default']
   const GridProps: typeof import('./src/hooks/Props')['GridProps']
+  const Theme: typeof import('./src/hooks/Theme')['default']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']

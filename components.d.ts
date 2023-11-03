@@ -13,5 +13,6 @@ declare module 'vue' {
     GridContent: typeof import('./src/hooks/GridContent.tsx')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Theme: typeof import('./src/hooks/Theme.tsx')['default']
   }
 }
