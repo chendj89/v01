@@ -10,7 +10,6 @@ declare module 'vue' {
     Avatar: typeof import('./src/components/avatar/index.vue')['default']
     Grid: typeof import('./src/hooks/Grid.tsx')['default']
     GridCell: typeof import('./src/hooks/GridCell.tsx')['default']
-    GridContent: typeof import('./src/hooks/GridContent.tsx')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Theme: typeof import('./src/hooks/Theme.tsx')['default']
