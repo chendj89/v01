@@ -36,13 +36,13 @@
   // 按钮
   --button-y: 0px;
   // 洞
-  --star-hole: #16181e;
-  --star-hole-scale: 0;
-  --star-hole-inner: #20232c;
-  // 星星
-  --star-y: 0px;
-  --star-scale: 1;
-  --star-rotate: 0deg;
+  --icon-hole: #16181e;
+  --icon-hole-scale: 0;
+  --icon-hole-inner: #20232c;
+  // 图标
+  --icon-y: 0px;
+  --icon-scale: 1;
+  --icon-rotate: 0deg;
   display: flex;
   width: 40px;
   height: 40px;
@@ -52,7 +52,7 @@
   transition: transform 0.2s;
   border-radius: var(--radius);
   background: var(--theme);
-  &-icon {
+  &-hole {
     width: 100%;
     height: 90px;
     display: flex;
@@ -66,21 +66,21 @@
       display: block;
       width: 100%;
       height: 12px;
-      background: var(--star-hole);
-      box-shadow: inset 0 3px 0 0 var(--star-hole-inner);
+      background: var(--icon-hole);
+      box-shadow: inset 0 3px 0 0 var(--icon-hole-inner);
       border-radius: 100px / 30px;
-      transform: scale(var(--star-hole-scale));
+      transform: scale(var(--icon-hole-scale));
       transform-origin: 50% 100%;
     }
   }
-  &-star {
+  &-icon {
     position: absolute;
     left: 50%;
     bottom: 0px;
     font-size: 18px;
-    transform: translateX(-50%) translateY(var(--star-y))
-      rotate(var(--star-rotate)) scale(var(--star-scale));
-    border-radius: var(--star-radius, 0px);
+    transform: translateX(-50%) translateY(var(--icon-y))
+      rotate(var(--icon-rotate)) scale(var(--icon-scale));
+    border-radius: var(--icon-radius, 0px);
     transition: clip-path 0.2s, border-radius 0.2s, background 0.2s;
   }
 }
