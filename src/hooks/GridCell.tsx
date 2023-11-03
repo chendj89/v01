@@ -10,10 +10,9 @@ export default defineComponent({
     }
   },
   setup(props) {
-    let ins = getCurrentInstance()
     const grid = inject('grid') as Ref
     const getRect = () => {
-      const config = assign({}, grid.value, props, ins?.parent?.attrs)
+      const config = assign({}, grid.value, props)
       return createRect(config)
     }
     const style = ref(getRect())
