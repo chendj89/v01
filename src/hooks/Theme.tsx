@@ -4,6 +4,8 @@ export default defineComponent({
   setup() {
     const ele = ref()
     const doc: any = document
+    const isDark = ref(document.documentElement.classList.contains('dark'))
+    const isAnimate = ref(false)
     const isReducedMotion = () => {
       return (
         window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true
@@ -27,106 +29,95 @@ export default defineComponent({
         })
       })
     }
-    let i = 1
-    const animate = (cb) => {
-      let star = document.querySelector('.star')
-      document.querySelectorAll('.favorite-button').forEach((button) => {
-        button.addEventListener('click', (e) => {
-          e.preventDefault()
-
-          if (button.classList.contains('animated')) {
-            return
-          }
-          button.classList.add('animated')
-          gsap.to(button, {
-            keyframes: [
-              {
-                '--star-y': '-36px',
-                duration: 0.3,
-                ease: 'power2.out'
-              },
-              {
-                '--star-y': '48px',
-                '--star-scale': 0.4,
-                duration: 0.325,
-                onStart() {
-                  button.classList.add('star-round')
-                }
-              },
-              {
-                '--star-y': '-64px',
-                '--star-scale': 1,
-                duration: 0.45,
-                ease: 'power2.out',
-                onStart() {
-                  if (i % 2 == 1) {
-                    star.innerHTML = '🌚'
-                  } else {
-                    star.innerHTML = '🌞'
-                  }
-                  i++
-                  button.classList.toggle('active')
-                  cb && cb()
-                  setTimeout(() => button.classList.remove('star-round'), 100)
-                }
-              },
-              {
-                '--star-y': '0px',
-                duration: 0.45,
-                ease: 'power2.in'
-              },
-              {
-                '--button-y': '3px',
-                duration: 0.11
-              },
-              {
-                '--button-y': '0px',
-                '--star-face-scale': 0.65,
-                duration: 0.125
-              },
-              {
-                '--star-face-scale': 1,
-                duration: 0.15
+    const animate = (cb: any) => {
+      let star: any = ele.value.querySelector('.theme-star')
+      let button = ele.value
+      if (isAnimate.value) {
+        return
+      }
+      isAnimate.value = true
+      gsap.to(button, {
+        keyframes: [
+          {
+            '--star-y': '-36px',
+            duration: 0.3,
+            ease: 'power2.out'
+          },
+          {
+            '--star-y': '48px',
+            '--star-scale': 0.4,
+            duration: 0.325
+          },
+          {
+            '--star-y': '-64px',
+            '--star-scale': 1,
+            duration: 0.45,
+            ease: 'power2.out',
+            onStart() {
+              if (!isDark.value) {
+                star.innerHTML = '🌚'
+              } else {
+                star.innerHTML = '🌞'
               }
-            ],
-            clearProps: true,
-            onComplete() {
-              button.classList.remove('animated')
+              isDark.value = !isDark.value
+              cb && cb()
             }
-          })
+          },
+          {
+            '--star-y': '0px',
+            duration: 0.45,
+            ease: 'power2.in'
+          },
+          {
+            '--button-y': '10px',
+            duration: 0.11
+          },
+          {
+            '--button-y': '0px',
+            duration: 0.125
+          }
+        ],
+        clearProps: true,
+        onComplete() {
+          isAnimate.value = false
+        }
+      })
 
-          gsap.to(button, {
-            keyframes: [
-              {
-                '--star-hole-scale': 0.8,
-                duration: 0.5,
-                ease: 'elastic.out(1, .75)'
-              },
-              {
-                '--star-hole-scale': 0,
-                duration: 0.2,
-                delay: 0.2
-              }
-            ]
-          })
-          gsap.to(button, {
-            '--star-rotate': '360deg',
-            duration: 1.55,
-            clearProps: true
-          })
-        })
+      gsap.to(button, {
+        keyframes: [
+          {
+            '--star-hole-scale': 0.8,
+            duration: 0.5,
+            ease: 'elastic.out(1, .75)'
+          },
+          {
+            '--star-hole-scale': 0,
+            duration: 0.2,
+            delay: 0.2
+          }
+        ]
+      })
+      gsap.to(button, {
+        '--star-rotate': '360deg',
+        duration: 1.55,
+        clearProps: true
       })
     }
     return {
       ele,
-      setTheme
+      setTheme,
+      isAnimate
     }
   },
   render() {
     return (
-      <div ref="ele" onClick={this.setTheme} class="favorite-button">
-        <div class="icon">
-          <div class="star">🌞</div>
+      <div
+        ref="ele"
+        onClick={this.setTheme}
+        class={['theme', { loading: this.isAnimate }]}
+      >
+        <div class="theme-icon">
+          <div class="theme-star">🌞</div>
         </div>
       </div>
     )

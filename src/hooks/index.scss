@@ -32,40 +32,34 @@
   --theme: #2196f3;
   background-color: #313131;
 }
-.favorite-button {
-  --star-color-active: #f6c206;
-  --star-face-color-active: #845901;
-  --star-hole: #16181e;
-  --star-hole-inner: #20232c;
+.theme {
+  // 按钮
   --button-y: 0px;
+  // 洞
+  --star-hole: #16181e;
+  --star-hole-scale: 0;
+  --star-hole-inner: #20232c;
+  // 星星
   --star-y: 0px;
   --star-scale: 1;
   --star-rotate: 0deg;
-  --star-hole-scale: 0;
-  --star-face-scale: 1;
   display: flex;
-  width: 100%;
-  height: 100%;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   position: relative;
-  transform: translateY(var(--button-y))
-    scale(var(--background-scale-x, 1), var(--background-scale-y, 1))
-    translateZ(0);
+  transform: translateY(var(--button-y));
   transition: transform 0.2s;
   border-radius: var(--radius);
   background: var(--theme);
-  &:active {
-    --background-scale-x: 0.98;
-    --background-scale-y: 0.96;
-  }
-  .icon {
+  &-icon {
     width: 100%;
-    height: 120px;
+    height: 90px;
     display: flex;
     pointer-events: none;
     position: relative;
     clip-path: ellipse(150% 50% at 50% 50%);
-    margin-top: -90px;
+    margin-top: -60px;
     &:before {
       content: '';
       margin-top: auto;
@@ -78,35 +72,15 @@
       transform: scale(var(--star-hole-scale));
       transform-origin: 50% 100%;
     }
-    .star {
-      position: absolute;
-      left: 50%;
-      bottom: 0px;
-      font-size: 18px;
-      transform: translateX(-50%) translateY(var(--star-y))
-        rotate(var(--star-rotate)) scale(var(--star-scale));
-      border-radius: var(--star-radius, 0px);
-      transition: clip-path 0.2s, border-radius 0.2s, background 0.2s;
-    }
   }
-  &.star-round {
-    --star-clip: polygon(
-      10px 0,
-      20px 0,
-      20px 7px,
-      20px 12px,
-      20px 19px,
-      10px 19px,
-      0 19px,
-      0 12px,
-      0 7px,
-      0 0
-    );
-    --star-radius: 50%;
-  }
-  &.active {
-    --star-color: var(--star-color-active);
-    --star-face-color: var(--star-face-color-active);
-    --star-face-radius: 0 0 2px 2px;
+  &-star {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    font-size: 18px;
+    transform: translateX(-50%) translateY(var(--star-y))
+      rotate(var(--star-rotate)) scale(var(--star-scale));
+    border-radius: var(--star-radius, 0px);
+    transition: clip-path 0.2s, border-radius 0.2s, background 0.2s;
   }
 }

@@ -9,11 +9,14 @@
         <Avatar src="/res/img/xiaoxin.png"></Avatar>
       </GridCell>
       <GridCell :left="1" :top="2" :col="1" :row="1">
-        <Avatar src="/res/img/xiaoxin2.png"></Avatar></GridCell>
+        <Avatar src="/res/img/xiaoxin2.png"></Avatar>
+      </GridCell>
       <GridCell :left="2" :top="2" :col="1" :row="1"></GridCell>
       <GridCell :left="3" :top="2" :col="1" :row="1"></GridCell>
       <GridCell :left="4" :top="2" :col="1" :row="1"></GridCell>
-      <GridCell :left="5" :top="2" :col="1" :row="1"></GridCell>
+      <GridCell :left="5" :top="2" :col="1" :row="1">
+        <Theme></Theme>
+      </GridCell>
       <GridCell :noBg="true" :left="6" :top="2" :col="1" :row="1">
         <Theme></Theme>
       </GridCell>
