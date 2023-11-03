@@ -43,6 +43,8 @@ export const createRect = (params: Partial<iCreateRect>) => {
   if (opts.isGrid) {
     result.width += opts.border * 2
     result.height += opts.border * 2
+  } else {
+    result['--border'] = 0
   }
   if (opts.unit) {
     for (let attr in result) {
