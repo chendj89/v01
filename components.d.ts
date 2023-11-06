@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Avatar: typeof import('./src/components/avatar/index.vue')['default']
+    Banner: typeof import('./src/components/banner/index.vue')['default']
     Grid: typeof import('./src/hooks/Grid.tsx')['default']
     GridCell: typeof import('./src/hooks/GridCell.tsx')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
