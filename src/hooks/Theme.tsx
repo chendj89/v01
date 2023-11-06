@@ -6,14 +6,23 @@ export default defineComponent({
     const doc: any = document
     const isDark = ref(document.documentElement.classList.contains('dark'))
     const isAnimate = ref(false)
+    /**
+     * 判断当前动画是否在执行
+     */
     const isReducedMotion = () => {
       return (
         window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true
       )
     }
+    /**
+     * 切换主题
+     */
     const toggleTheme = () => {
       doc.documentElement.classList.toggle('dark')
     }
+    /**
+     * 设置主题 
+     */
     const setTheme = (event?: MouseEvent) => {
       animate(() => {
         if (!doc.startViewTransition || isReducedMotion()) {
