@@ -34,8 +34,11 @@ export default defineComponent({
   render() {
     return (
       <div class={['grid-cell', { nobg: this.$props.noBg }]} style={this.style}>
-        <div class="grid-fill"></div>
-        {this.$slots.default?.()}
+        {this.$slots.default ? (
+          this.$slots.default()
+        ) : (
+          <div class="grid-fill"></div>
+        )}
       </div>
     )
   }

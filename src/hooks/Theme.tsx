@@ -1,7 +1,13 @@
 import gsap from 'gsap'
 export default defineComponent({
   name: 'Theme',
-  setup() {
+  props: {
+    callBack: {
+      type: Function,
+      default: () => {}
+    }
+  },
+  setup(props) {
     const ele = ref()
     const doc: any = document
     const isDark = ref(document.documentElement.classList.contains('dark'))
@@ -21,10 +27,10 @@ export default defineComponent({
       doc.documentElement.classList.toggle('dark')
     }
     /**
-     * 设置主题 
+     * 设置主题
      */
     const setTheme = (event?: MouseEvent) => {
-      animate(() => {
+      run(() => {
         if (!doc.startViewTransition || isReducedMotion()) {
           toggleTheme()
           return
@@ -38,7 +44,7 @@ export default defineComponent({
         })
       })
     }
-    const animate = (cb: any) => {
+    const run = (cb: any) => {
       let star: any = ele.value.querySelector('.theme-icon')
       let button = ele.value
       if (isAnimate.value) {
@@ -70,6 +76,7 @@ export default defineComponent({
               }
               isDark.value = !isDark.value
               cb && cb()
+              props.callBack&&props.callBack()
             }
           },
           {

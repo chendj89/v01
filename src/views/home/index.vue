@@ -5,7 +5,7 @@
         <Avatar src="/res/img/lufei.jfif"></Avatar>
       </GridCell>
       <GridCell :left="2" :top="0" :col="5" :row="2">
-        <Banner></Banner>
+        <Banner ref="bannerRef"></Banner>
       </GridCell>
       <GridCell :left="0" :top="2" :col="1" :row="1">
         <Avatar src="/res/img/xiaoxin.png"></Avatar>
@@ -19,13 +19,17 @@
       <GridCell :left="5" :top="2" :col="1" :row="1">
       </GridCell>
       <GridCell :noBg="true" :left="6" :top="2" :col="1" :row="1">
-        <Theme></Theme>
+        <Theme :callBack="switchTheme"></Theme>
       </GridCell>
     </Grid>
   </div>
 </template>
 
 <script setup lang="ts" name="Home">
+const bannerRef = ref()
+const switchTheme = () => {
+  bannerRef.value.reload()
+}
 </script>
 
 <style scoped></style>

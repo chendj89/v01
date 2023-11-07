@@ -34,6 +34,9 @@ const animate = () => {
     .add(gsap.from(bannerDesc, { duration: 0.2, y: -20, opacity: 0, stagger: 0.075 }), '-=0.2')
   tl.play()
 }
+defineExpose({
+  reload:animate
+})
 onMounted(() => {
   animate()
 })
