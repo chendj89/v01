@@ -28,7 +28,6 @@
           <Avatar src="/res/img/lufei.jfif"></Avatar>
         </GridCell>
       </Grid>
-
     </Grid>
   </div>
 </template>
