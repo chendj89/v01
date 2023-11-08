@@ -18,8 +18,9 @@ export interface iCreateRect {
  * @param list
  * @returns
  */
-const closestToNum = (num: number, list: number[]): number => {
+export const closestToNum = (num: number, list: number[]): number => {
   let closest = list[0]
+  console.log(list)
   let minDiff = Math.abs(num - list[0])
   for (let i = 1; i < list.length; i++) {
     const diff = Math.abs(num - list[i])
@@ -78,6 +79,10 @@ export const createGrid = (params: Partial<iCreateRect>) => {
   if (opts.isGrid) {
     result.width += border
     result.height += border
+  }
+  if(opts.size==30){
+    result.left+=10
+    result.top+=10
   }
   if (opts.unit) {
     for (let attr in result) {

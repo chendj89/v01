@@ -1,4 +1,4 @@
-import { createGrid, assign } from '@/utils'
+import { createGrid, assign, closestToNum } from '@/utils'
 import { GridProps } from '@/hooks/Props'
 import { defineExpose } from 'vue'
 export default defineComponent({
@@ -14,13 +14,11 @@ export default defineComponent({
     const grid = inject('grid') as Ref
     const config = assign({}, grid.value, props)
     const ins: any = getCurrentInstance()
-    const childConfig: any = ref({
-      size: config.size,
-      gap: config.gap
-    })
+    const childConfig: any = ref(null)
     // 是否嵌套
     if (ins?.parent?.type?.name == 'Grid') {
       config.isGrid = false
+      childConfig.value = {}
       let border = 2 * config.border
       let width =
         config.col * config.size + (config.col - 1) * config.gap + border
@@ -33,6 +31,7 @@ export default defineComponent({
         let gapCol =
           (width - config.col * childConfig.value.size - 2 * border) /
           (config.col - 1)
+
         childConfig.value.gap = {
           col: gapCol,
           row: config.gap
@@ -56,8 +55,13 @@ export default defineComponent({
     }
   },
   render() {
+    const oStyle = { ...this.style }
+    if (this.childConfig) {
+      oStyle.outline = '1px dashed'
+      oStyle.border = 'none'
+    }
     return (
-      <div class="grid" style={this.style}>
+      <div class="grid" style={oStyle}>
         {this.$slots.default?.()}
       </div>
     )
