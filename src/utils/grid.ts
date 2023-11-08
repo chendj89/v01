@@ -3,37 +3,72 @@ export interface iCreateRect {
   top: number
   col: number
   row: number
-  gap: number
+  gap: number | { col: number; row: number }
   border: number
   radius: number
   size: number
+  width: number
+  height: number
   isGrid: boolean
   unit: 'px' | '%' | 'vw' | 'vh' | null
 }
 /**
- * 创建单元格
+ * 获取最接近的数
+ * @param num
+ * @param list
+ * @returns
  */
-export const createRect = (params: Partial<iCreateRect>) => {
-  let opts = Object.assign(
-    {},
-    {
-      left: 0,
-      top: 0,
-      col: 1,
-      row: 1,
-      border: 10,
-      gap: 10,
-      size: 40,
-      radius: 6,
-      isGrid: false,
-      unit: 'px'
-    },
-    params
-  )
-  let left = opts.left * (opts.gap + opts.size)
-  let top = opts.top * (opts.gap + opts.size)
-  let width = opts.col * opts.size + (opts.col - 1) * opts.gap
-  let height = opts.row * opts.size + (opts.row - 1) * opts.gap
+const closestToNum = (num: number, list: number[]): number => {
+  let closest = list[0]
+  let minDiff = Math.abs(num - list[0])
+  for (let i = 1; i < list.length; i++) {
+    const diff = Math.abs(num - list[i])
+    if (diff < minDiff) {
+      minDiff = diff
+      closest = list[i]
+    }
+  }
+  return closest
+}
+
+export const createGrid = (params: Partial<iCreateRect>) => {
+  let defaults: iCreateRect = {
+    left: 0,
+    top: 0,
+    col: 1,
+    row: 1,
+    border: 10,
+    gap: 10,
+    size: 40,
+    radius: 6,
+    unit: 'px',
+    width: 0,
+    height: 0,
+    isGrid: false
+  }
+  
+  let opts: iCreateRect = Object.assign({}, defaults, params)
+  let gapCol = typeof opts.gap === 'number' ? opts.gap : opts.gap!.col
+  let gapRow = typeof opts.gap === 'number' ? opts.gap : opts.gap!.row
+  let size = opts.size
+  let border = 2 * opts.border
+  if (opts.width&&opts.height) {
+    if (opts.col > opts.row) {
+      size = (opts.height - (opts.row - 1) * gapRow - 2 * border) / opts.row
+      gapCol = (opts.width - opts.col * size - 2 * border) / (opts.col - 1)
+    } else {
+      size = (opts.width - (opts.col - 1) * gapCol - 2 * border) / opts.col
+      let gapRow1 =
+        (opts.height - opts.row * size - 2 * border) / (opts.row - 1)
+      let gapRow2 =
+        (opts.height - (opts.row + 1) * size - 2 * border) / opts.row
+      gapRow = closestToNum(opts.border, [gapRow1, gapRow2])
+    }
+  }
+  let left = opts.left * (gapCol + size)
+  let top = opts.top * (gapRow + size)
+  let width = opts.col * size + (opts.col - 1) * gapCol
+  let height = opts.row * size + (opts.row - 1) * gapRow
   let result: Record<string, any> = {
     left,
     top,
@@ -41,10 +76,8 @@ export const createRect = (params: Partial<iCreateRect>) => {
     height
   }
   if (opts.isGrid) {
-    result.width += opts.border * 2
-    result.height += opts.border * 2
-  } else {
-    result['--border'] = 0
+    result.width += border
+    result.height += border
   }
   if (opts.unit) {
     for (let attr in result) {

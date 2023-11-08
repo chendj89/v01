@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="display: flex; gap: 20px;">
     <Grid>
       <GridCell :col="2" :row="2">
         <Avatar src="/res/img/lufei.jfif"></Avatar>
@@ -21,6 +21,14 @@
       <GridCell :noBg="true" :left="6" :top="2" :col="1" :row="1">
         <Theme :callBack="switchTheme"></Theme>
       </GridCell>
+    </Grid>
+    <Grid>
+      <Grid :left="0" :top="0" :col="5" :row="2">
+        <GridCell :col="1" :row="1">
+          <Avatar src="/res/img/lufei.jfif"></Avatar>
+        </GridCell>
+      </Grid>
+
     </Grid>
   </div>
 </template>

@@ -23,6 +23,6 @@ export const GridProps = {
   },
   isGrid: {
     type: Boolean,
-    default: true
+    default: false
   }
 }

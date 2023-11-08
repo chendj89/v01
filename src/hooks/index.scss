@@ -1,4 +1,5 @@
 @mixin Grid() {
+  display: inline-block;
   position: relative;
   border: var(--border) solid #fff;
   border-radius: var(--radius);
