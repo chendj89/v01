@@ -45,8 +45,8 @@
   --icon-scale: 1;
   --icon-rotate: 0deg;
   display: flex;
-  width: 40px;
-  height: 40px;
+  width: var(--size);
+  height: var(--size);
   cursor: pointer;
   position: relative;
   transform: translateY(var(--button-y));

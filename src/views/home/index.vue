@@ -29,9 +29,10 @@
         </GridCell>
         <GridCell :left="1" :col="1" :row="1">
         </GridCell>
-        <GridCell :left="2" :col="1" :row="1">
+        <GridCell :left="2" :col="2" :row="1">
         </GridCell>
-        <GridCell :left="3" :col="1" :row="1">
+      
+        <GridCell :top="1" :left="0" :col="1" :row="1">
         </GridCell>
       </Grid>
     </Grid>

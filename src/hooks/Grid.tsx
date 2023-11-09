@@ -1,67 +1,30 @@
 import { createGrid, assign, closestToNum } from '@/utils'
 import { GridProps } from '@/hooks/Props'
-import { defineExpose } from 'vue'
+import type * as CSS from 'csstype'
+
 export default defineComponent({
   name: 'Grid',
-  props: {
-    ...GridProps,
-    isGrid: {
-      type: Boolean,
-      default: true
-    }
-  },
+  props: GridProps,
   setup(props) {
     const grid = inject('grid') as Ref
     const config = assign({}, grid.value, props)
     const ins: any = getCurrentInstance()
-    const childConfig: any = ref(null)
-    // 是否嵌套
-    if (ins?.parent?.type?.name == 'Grid') {
-      config.isGrid = false
-      childConfig.value = {}
-      let border = 2 * config.border
-      let width =
-        config.col * config.size + (config.col - 1) * config.gap + border
-      let height =
-        config.row * config.size + (config.row - 1) * config.gap + border
-
-      if (config.col > config.row) {
-        childConfig.value.size =
-          (height - (config.row - 1) * config.gap - 2 * border) / config.row
-        let gapCol =
-          (width - config.col * childConfig.value.size - 2 * border) /
-          (config.col - 1)
-
-        childConfig.value.gap = {
-          col: gapCol,
-          row: config.gap
-        }
-      } else {
-        childConfig.value.size =
-          (width - (config.col - 1) * config.gap - 2 * border) / config.col
-        let gapRow =
-          (height - config.row * childConfig.value.size - 2 * border) /
-          (config.row - 1)
-        childConfig.value.gap = {
-          col: config.gap,
-          row: gapRow
-        }
-      }
+    const isNest = ref(ins?.parent?.type?.name == ins.type.name)
+    const style = ref<CSS.Properties>(
+      createGrid(config, isNest.value ? 'container' : 'grid')
+    )
+    if (isNest.value) {
+      style.value.border = 'none'
+      style.value.outline = '1px dashed'
     }
-    const style = ref(createGrid(config))
     return {
       style,
-      childConfig
+      isNest
     }
   },
   render() {
-    const oStyle = { ...this.style }
-    if (this.childConfig) {
-      oStyle.outline = '1px dashed'
-      oStyle.border = 'none'
-    }
     return (
-      <div class="grid" style={oStyle}>
+      <div class="grid" style={this.style}>
         {this.$slots.default?.()}
       </div>
     )
