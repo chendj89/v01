@@ -9,6 +9,7 @@ export default defineComponent({
     const ins: any = getCurrentInstance()
     const getRect = () => {
       const config = assign({}, grid.value, props)
+      let result:any = {}
       if (ins.parent.setupState.isNest) {
         let { width, height } = ins.parent.setupState.style
         const { col, row } = ins.parent.props
@@ -27,15 +28,19 @@ export default defineComponent({
           size = (width - (col - 1) * gapCol - 2 * border) / col
           gapRow = (height - (row - 1) * gapCol - 2 * border) / size
         }
-        return createGridCell({
+        result = createGridCell({
           ...config,
           size,
           border,
           gap: { col: gapCol, row: gapRow }
         })
       } else {
-        return createGrid(config)
+        result = createGrid(config)
       }
+      if (ins.ctx.$slots.default) {
+        result.background = 'none'
+      }
+      return result
     }
     const style = ref(getRect())
     watch(
