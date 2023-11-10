@@ -18,8 +18,6 @@ const props = withDefaults(defineProps<Props>(), {
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: var(--radius);
-  overflow: hidden;
 
   &-img {
     display: block;

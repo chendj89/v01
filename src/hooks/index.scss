@@ -10,6 +10,8 @@
   position: absolute;
   border-radius: var(--radius);
   background-color: var(--theme);
+  overflow: clip;
+  overflow-clip-margin: content-box;
 }
 .grid {
   @include Grid();
