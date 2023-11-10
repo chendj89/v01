@@ -23,7 +23,7 @@
       </GridCell>
     </Grid>
     <Grid>
-      <Grid :left="0" :top="0" :col="4" :row="2">
+      <Grid :left="0" :top="0" :col="5" :row="2">
         <GridCell :col="1" :row="1">
           <Avatar src="/res/img/lufei.jfif"></Avatar>
         </GridCell>
