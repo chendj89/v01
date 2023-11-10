@@ -36,6 +36,7 @@
         </GridCell>
       </Grid>
     </Grid>
+    <VtBanner></VtBanner>
   </div>
 </template>
 
