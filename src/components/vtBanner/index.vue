@@ -21,7 +21,7 @@ const click = (ev: any) => {
     // @ts-ignore
     document.querySelectorAll('.vtBanner-cell').forEach((cell: HTMLElement) => {
       if (cell == ev.target) {
-        cell.style.zIndex = 1;
+        cell.style.zIndex = '1';
       } else {
         cell.style.zIndex = '';
       }
